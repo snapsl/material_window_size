@@ -4,20 +4,20 @@ enum WindowHeightClass implements Comparable<WindowHeightClass> {
   /// Compact window height class
   ///
   /// height < 480
-  compact(breakpoint: _smallBp),
+  compact(breakpoint: _compact),
 
   /// Medium window height class
   ///
   /// 480dp ≤ height < 900dp
-  medium(breakpoint: _mediumBp),
+  medium(breakpoint: _medium),
 
   /// Expanded window height class
   ///
   /// height ≥ 900dp
   expanded(breakpoint: _expanded);
 
-  static const double _smallBp = 0;
-  static const double _mediumBp = 480;
+  static const double _compact = 0;
+  static const double _medium = 480;
   static const double _expanded = 900;
 
   final double breakpoint;
@@ -34,7 +34,7 @@ enum WindowHeightClass implements Comparable<WindowHeightClass> {
 
   static WindowHeightClass fromHeight(double height) {
     return switch (height) {
-      < _mediumBp => WindowHeightClass.compact,
+      < _medium => WindowHeightClass.compact,
       < _expanded => WindowHeightClass.medium,
       _ => WindowHeightClass.expanded,
     };
