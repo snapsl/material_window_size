@@ -41,8 +41,8 @@ enum WindowHeightClass implements Comparable<WindowHeightClass> {
   }
 
   static WindowHeightClass of(BuildContext context) {
-    final screenWidth = MediaQuery.sizeOf(context).height;
+    final height = MediaQuery.sizeOf(context).height;
 
-    return fromHeight(screenWidth);
+    return fromHeight(height);
   }
 }

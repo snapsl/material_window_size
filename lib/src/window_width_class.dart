@@ -54,8 +54,8 @@ enum WindowWidthClass implements Comparable<WindowWidthClass> {
   }
 
   static WindowWidthClass of(BuildContext context) {
-    final screenWidth = MediaQuery.sizeOf(context).width;
+    final width = MediaQuery.sizeOf(context).width;
 
-    return fromWidth(screenWidth);
+    return fromWidth(width);
   }
 }
