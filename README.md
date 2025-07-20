@@ -1,39 +1,62 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# material_window_size
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+A Flutter package that provides Material 3 window size classes for responsive layouts. Easily determine the width and height class of your app window to build adaptive UIs across devices.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Detects window width and height classes based on Material 3 guidelines
+- Provides enums for width (`WindowWidthClass`) and height (`WindowHeightClass`)
+- Utility methods for querying size classes from `BuildContext`
+- Constants for Material 3 layout breakpoints and side sheet widths
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add this package to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  material_window_size: ^0.1.0
+```
+
+Import the package:
+
+```dart
+import 'package:material_window_size/material_window_size.dart';
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+Query the window size class in your widget tree:
 
 ```dart
-const like = 'sample';
+import 'package:flutter/material.dart';
+import 'package:material_window_size/material_window_size.dart';
+
+@override
+Widget build(BuildContext context) {
+  final windowSize = WindowSizeClass.of(context);
+
+  if (windowSize.width < WindowWidthClass.medium) {
+    // Handle compact width layout
+  }
+  if (windowSize.height < WindowHeightClass.medium) {
+    // Handle compact height layout
+  }
+
+  // Using pattern matching
+  return switch (windowSize.width) {
+    WindowWidthClass.compact => CompactView(),
+    WindowWidthClass.medium => MediumView(),
+    WindowWidthClass.expanded => ExpandedView(),
+    WindowWidthClass.large => LargeView(),
+    WindowWidthClass.extraLarge => ExtraLargeView(),
+  };
+}
 ```
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+- [Material 3 Window Size Classes](https://m3.material.io/foundations/layout/applying-layout/window-size-classes)
+- [Material 3 Layout Guidelines](https://m3.material.io/foundations/layout/understanding-layout/overview)
+
+Contributions, issues, and suggestions are welcome! Please open an issue or pull request on GitHub.
