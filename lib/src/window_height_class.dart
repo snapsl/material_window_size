@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// An enum that represents the window height class according to Material 3 guidelines.
+///
+/// See: https://m3.material.io/foundations/layout/applying-layout/window-size-classes
 enum WindowHeightClass implements Comparable<WindowHeightClass> {
   /// Compact window height class
   ///
@@ -20,8 +23,12 @@ enum WindowHeightClass implements Comparable<WindowHeightClass> {
   static const double _medium = 480;
   static const double _expanded = 900;
 
+  /// The breakpoint value for the [WindowHeightClass].
+  ///
+  /// Represents the minimum height in dp for this class.
   final double breakpoint;
 
+  /// Creates a [WindowHeightClass] with the given [breakpoint].
   const WindowHeightClass({required this.breakpoint});
 
   bool operator <(WindowHeightClass other) => index < other.index;
@@ -32,6 +39,13 @@ enum WindowHeightClass implements Comparable<WindowHeightClass> {
   @override
   int compareTo(WindowHeightClass other) => index.compareTo(other.index);
 
+  /// Returns the [WindowHeightClass] for a given height in dp.
+  ///
+  /// Example:
+  /// ```dart
+  /// final heightClass = WindowHeightClass.fromHeight(500);
+  /// // heightClass == WindowHeightClass.medium
+  /// ```
   static WindowHeightClass fromHeight(double height) {
     return switch (height) {
       < _medium => WindowHeightClass.compact,
@@ -40,6 +54,15 @@ enum WindowHeightClass implements Comparable<WindowHeightClass> {
     };
   }
 
+  /// Returns the [WindowHeightClass] for the current [BuildContext].
+  ///
+  /// Example:
+  /// ```dart
+  /// final heightClass = WindowHeightClass.of(context);
+  /// if (heightClass < WindowHeightClass.medium) {
+  ///   // Handle compact height layout
+  /// }
+  /// ```
   static WindowHeightClass of(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
 
