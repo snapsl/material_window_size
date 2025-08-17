@@ -1,10 +1,10 @@
 name: material_window_size
-description: "A new Flutter package project."
+description: "A Flutter package that provides Material 3 window size classes for responsive layouts."
 version: 0.0.1
 homepage:
 
 environment:
-  sdk: ^3.8.1
+  sdk: ^3.9.0
   flutter: ">=1.17.0"
 
 dependencies:
