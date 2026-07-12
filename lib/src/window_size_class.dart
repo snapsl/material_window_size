@@ -5,7 +5,7 @@ import 'package:material_window_size/src/window_width_class.dart';
 /// A class that combines [WindowHeightClass] and [WindowWidthClass] to represent the overall window size class.
 ///
 /// See: https://m3.material.io/foundations/layout/applying-layout/window-size-classes
-class WindowSizeClass {
+final class WindowSizeClass {
   /// The window's height class (e.g., compact, medium, expanded).
   final WindowHeightClass height;
 
