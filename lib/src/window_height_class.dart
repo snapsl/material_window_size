@@ -48,9 +48,9 @@ enum WindowHeightClass implements Comparable<WindowHeightClass> {
   /// ```
   static WindowHeightClass fromHeight(double height) {
     return switch (height) {
-      < _medium => WindowHeightClass.compact,
-      < _expanded => WindowHeightClass.medium,
-      _ => WindowHeightClass.expanded,
+      < _medium => compact,
+      < _expanded => medium,
+      _ => expanded,
     };
   }
 

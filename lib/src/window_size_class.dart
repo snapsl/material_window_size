@@ -33,8 +33,8 @@ class WindowSizeClass {
     final size = MediaQuery.sizeOf(context);
 
     return WindowSizeClass(
-      height: WindowHeightClass.fromHeight(size.height),
-      width: WindowWidthClass.fromWidth(size.width),
+      height: .fromHeight(size.height),
+      width: .fromWidth(size.width),
     );
   }
 }
