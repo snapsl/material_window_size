@@ -29,7 +29,7 @@ enum WindowWidthClass implements Comparable<WindowWidthClass> {
   /// width ≥ 1600dp
   extraLarge(breakpoint: _extraLarge, panes: 2, spacing: 24, fixedPane: 412);
 
-  static const double _compact = 0;
+  static const double _compact = .negativeInfinity;
   static const double _medium = 600;
   static const double _expanded = 840;
   static const double _large = 1200;
@@ -66,14 +66,6 @@ enum WindowWidthClass implements Comparable<WindowWidthClass> {
     this.fixedPane,
   });
 
-  bool operator <(WindowWidthClass other) => index < other.index;
-  bool operator <=(WindowWidthClass other) => index <= other.index;
-  bool operator >(WindowWidthClass other) => index > other.index;
-  bool operator >=(WindowWidthClass other) => index >= other.index;
-
-  @override
-  int compareTo(WindowWidthClass other) => index.compareTo(other.index);
-
   /// Returns the [WindowWidthClass] for a given width in dp.
   ///
   /// Example:
@@ -81,13 +73,13 @@ enum WindowWidthClass implements Comparable<WindowWidthClass> {
   /// final widthClass = WindowWidthClass.fromWidth(700);
   /// // widthClass == WindowWidthClass.medium
   /// ```
-  static WindowWidthClass fromWidth(double width) {
+  factory fromWidth(double width) {
     return switch (width) {
-      < _medium => compact,
-      < _expanded => medium,
-      < _large => expanded,
-      < _extraLarge => large,
-      _ => extraLarge,
+      >= _extraLarge => extraLarge,
+      >= _large => large,
+      >= _expanded => expanded,
+      >= _medium => medium,
+      _ => compact,
     };
   }
 
@@ -100,9 +92,25 @@ enum WindowWidthClass implements Comparable<WindowWidthClass> {
   ///   // Handle compact layout
   /// }
   /// ```
-  static WindowWidthClass of(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
+  factory of(BuildContext context) {
+    final width = MediaQuery.widthOf(context);
 
-    return fromWidth(width);
+    return .fromWidth(width);
   }
+
+  /// Whether this [WindowWidthClass] is less than [other].
+  bool operator <(WindowWidthClass other) => index < other.index;
+
+  /// Whether this [WindowWidthClass] is less than or equal to [other].
+  bool operator <=(WindowWidthClass other) => index <= other.index;
+
+  /// Whether this [WindowWidthClass] is greater than [other].
+  bool operator >(WindowWidthClass other) => index > other.index;
+
+  /// Whether this [WindowWidthClass] is greater than or equal to [other].
+  bool operator >=(WindowWidthClass other) => index >= other.index;
+
+  /// Compares this [WindowWidthClass] with another [WindowWidthClass].
+  @override
+  int compareTo(WindowWidthClass other) => index.compareTo(other.index);
 }

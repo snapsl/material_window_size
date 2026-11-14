@@ -17,6 +17,14 @@ final class WindowSizeClass {
   /// Both [height] and [width] are required and represent the window's size classification.
   const WindowSizeClass({required this.height, required this.width});
 
+  /// Returns the [WindowSizeClass] for a given [Size].
+  factory fromSize(Size size) {
+    return .new(
+      height: .fromHeight(size.height),
+      width: .fromWidth(size.width),
+    );
+  }
+
   /// Returns the [WindowSizeClass] for the current [BuildContext].
   ///
   /// Example:
@@ -29,12 +37,9 @@ final class WindowSizeClass {
   ///   // Handle compact height layout
   /// }
   /// ```
-  static WindowSizeClass of(BuildContext context) {
+  factory of(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
 
-    return WindowSizeClass(
-      height: .fromHeight(size.height),
-      width: .fromWidth(size.width),
-    );
+    return .fromSize(size);
   }
 }

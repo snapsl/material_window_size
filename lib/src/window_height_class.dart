@@ -19,7 +19,7 @@ enum WindowHeightClass implements Comparable<WindowHeightClass> {
   /// height ≥ 900dp
   expanded(breakpoint: _expanded);
 
-  static const double _compact = 0;
+  static const double _compact = .negativeInfinity;
   static const double _medium = 480;
   static const double _expanded = 900;
 
@@ -31,14 +31,6 @@ enum WindowHeightClass implements Comparable<WindowHeightClass> {
   /// Creates a [WindowHeightClass] with the given [breakpoint].
   const WindowHeightClass({required this.breakpoint});
 
-  bool operator <(WindowHeightClass other) => index < other.index;
-  bool operator <=(WindowHeightClass other) => index <= other.index;
-  bool operator >(WindowHeightClass other) => index > other.index;
-  bool operator >=(WindowHeightClass other) => index >= other.index;
-
-  @override
-  int compareTo(WindowHeightClass other) => index.compareTo(other.index);
-
   /// Returns the [WindowHeightClass] for a given height in dp.
   ///
   /// Example:
@@ -46,11 +38,11 @@ enum WindowHeightClass implements Comparable<WindowHeightClass> {
   /// final heightClass = WindowHeightClass.fromHeight(500);
   /// // heightClass == WindowHeightClass.medium
   /// ```
-  static WindowHeightClass fromHeight(double height) {
+  factory fromHeight(double height) {
     return switch (height) {
-      < _medium => compact,
-      < _expanded => medium,
-      _ => expanded,
+      >= _expanded => .expanded,
+      >= _medium => .medium,
+      _ => .compact,
     };
   }
 
@@ -63,9 +55,25 @@ enum WindowHeightClass implements Comparable<WindowHeightClass> {
   ///   // Handle compact height layout
   /// }
   /// ```
-  static WindowHeightClass of(BuildContext context) {
-    final height = MediaQuery.sizeOf(context).height;
+  factory of(BuildContext context) {
+    final height = MediaQuery.heightOf(context);
 
-    return fromHeight(height);
+    return .fromHeight(height);
   }
+
+  /// Whether this [WindowHeightClass] is less than [other].
+  bool operator <(WindowHeightClass other) => index < other.index;
+
+  /// Whether this [WindowHeightClass] is less than or equal to [other].
+  bool operator <=(WindowHeightClass other) => index <= other.index;
+
+  /// Whether this [WindowHeightClass] is greater than [other].
+  bool operator >(WindowHeightClass other) => index > other.index;
+
+  /// Whether this [WindowHeightClass] is greater than or equal to [other].
+  bool operator >=(WindowHeightClass other) => index >= other.index;
+
+  /// Compares this [WindowHeightClass] with another [WindowHeightClass].
+  @override
+  int compareTo(WindowHeightClass other) => index.compareTo(other.index);
 }
