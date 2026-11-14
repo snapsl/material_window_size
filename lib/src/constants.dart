@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 /// [BoxConstraints] matching the Material 3 guidelines for maximum content width.
 const BoxConstraints materialBoxConstraints = BoxConstraints(maxWidth: 840);
