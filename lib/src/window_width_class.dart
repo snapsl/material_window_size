@@ -75,11 +75,11 @@ enum WindowWidthClass implements Comparable<WindowWidthClass> {
   /// ```
   factory fromWidth(double width) {
     return switch (width) {
-      >= _extraLarge => extraLarge,
-      >= _large => large,
-      >= _expanded => expanded,
-      >= _medium => medium,
-      _ => compact,
+      >= _extraLarge => .extraLarge,
+      >= _large => .large,
+      >= _expanded => .expanded,
+      >= _medium => .medium,
+      _ => .compact,
     };
   }
 

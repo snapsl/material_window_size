@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 /// [BoxConstraints] matching the Material 3 guidelines for maximum content width.
-const BoxConstraints materialBoxConstraints = BoxConstraints(maxWidth: 840);
+const BoxConstraints materialBoxConstraints = .new(maxWidth: 840);
 
 /// Width for a standard side sheet as recommended by Material 3.
 ///
